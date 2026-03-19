@@ -4,11 +4,12 @@ class PostsController < ApplicationController
   before_action :authorize_post, only: [ :destroy ]
 
   def index
-    @posts = Post.includes(:user, :business).order(created_at: :desc)
+    @posts = Post.includes(:business).order(created_at: :desc)
   end
 
   def create
-    @post = current_user.posts.build(post_params)
+    @business = current_user.businesses.find(post_params[:business_id])
+    @post = @business.posts.build(post_params)
     if @post.save
       redirect_to root_path, notice: "Post created!"
     else
@@ -28,10 +29,10 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :business_id)
   end
 
   def authorize_post
-    redirect_to root_path, alert: "Not authorized." unless @post.user == current_user
+    redirect_to root_path, alert: "Not authorized." unless @post.business.user == current_user
   end
 end

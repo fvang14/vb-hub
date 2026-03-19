@@ -1,11 +1,7 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  content: MyText
-  user: one
+  content: "Great news from Business One!"
   business: one
 
 two:
-  content: MyText
-  user: two
+  content: "Check out our new products at Business Two."
   business: two

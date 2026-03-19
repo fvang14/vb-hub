@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get "home/index"
-  get "directory", to: "directory#index"
+  get "home/index", as: :home_index
+  get "directory", to: "directory#index", as: :directory
   get "profile/:id", to: "profiles#show", as: :profile
 
   devise_for :users

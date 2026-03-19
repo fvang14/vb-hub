@@ -1,11 +1,9 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  content: MyText
-  sender_id: 1
-  receiver_id: 1
+  content: "Hello, Business One!"
+  sender: one
+  receiver: two
 
 two:
-  content: MyText
-  sender_id: 1
-  receiver_id: 1
+  content: "Hi User One!"
+  sender: two
+  receiver: one

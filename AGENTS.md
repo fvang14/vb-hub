@@ -1,6 +1,6 @@
-# VB Hub - Agent Guidelines
+# VolleyConnect - Agent Guidelines
 
-VB Hub is a Rails 8.1 application for the volleyball community, connecting players and businesses.
+VolleyConnect is a Rails 8.1 application for the volleyball community, connecting players and businesses.
 
 ## Build/Lint/Test Commands
 
@@ -129,7 +129,7 @@ test/
 
 Store sensitive values in environment variables:
 - `DATABASE_URL` - PostgreSQL connection string
-- `VB_HUB_DATABASE_PASSWORD` - Production database password
+- `VOLLEY_CONNECT_DATABASE_PASSWORD` - Production database password
 - `RAILS_MAX_THREADS` - Database connection pool size
 
 ## Authentication

@@ -2,8 +2,8 @@
 # check=error=true
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-# docker build -t vb_hub .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name vb_hub vb_hub
+# docker build -t volley_connect .
+# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name volley_connect volley_connect
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 

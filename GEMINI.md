@@ -1,9 +1,9 @@
-# VB Hub - Gemini CLI Context
+# VolleyConnect - Gemini CLI Context
 
-This document serves as the foundational mandate for the Gemini CLI agent within the VB Hub project. It outlines the project's architecture, technology stack, development workflows, and coding standards.
+This document serves as the foundational mandate for the Gemini CLI agent within the VolleyConnect project. It outlines the project's architecture, technology stack, development workflows, and coding standards.
 
 ## Project Overview
-**VB Hub** is a platform for the volleyball community, connecting individual players and businesses. It provides features for profiles, business directories, posts, and messaging.
+**VolleyConnect** is a platform for the volleyball community, connecting individual players and businesses. It provides features for profiles, business directories, posts, and messaging.
 
 ### Core Technology Stack
 - **Framework**: [Ruby on Rails 8.1.2](https://rubyonrails.org)

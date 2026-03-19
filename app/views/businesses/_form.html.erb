@@ -1,0 +1,42 @@
+<%= form_with(model: business, local: true, class: "space-y-4") do |form| %>
+  <% if business.errors.any? %>
+    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+      <h2 class="font-bold"><%= pluralize(business.errors.count, "error") %> prohibited this business from being saved:</h2>
+      <ul class="list-disc list-inside mt-2">
+        <% business.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :name, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border", placeholder: "Business name" %>
+  </div>
+
+  <div>
+    <%= form.label :description, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_area :description, rows: 4, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border", placeholder: "Describe your business..." %>
+  </div>
+
+  <div>
+    <%= form.label :industry, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :industry, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border", placeholder: "e.g., Volleyball Training, Apparel, Facility" %>
+  </div>
+
+  <div>
+    <%= form.label :location, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :location, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border", placeholder: "City, State" %>
+  </div>
+
+  <div>
+    <%= form.label :website_url, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.url_field :website_url, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border", placeholder: "https://example.com" %>
+  </div>
+
+  <div class="flex gap-3 pt-4">
+    <%= form.submit class: "inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+    <%= link_to "Cancel", business.new_record? ? businesses_path : business, class: "inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+  </div>
+<% end %>

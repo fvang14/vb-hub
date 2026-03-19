@@ -1,4 +1,4 @@
-<div class="w-full max-w-4xl">
+<div class="w-full max-w-5xl">
   <div class="flex justify-between items-center mb-8">
     <h1 class="text-3xl font-bold text-gray-900">Business Directory</h1>
     <% if user_signed_in? %>
@@ -6,15 +6,45 @@
     <% end %>
   </div>
 
+  <div class="bg-gray-50 p-4 rounded-lg mb-8 border border-gray-200">
+    <%= form_tag directory_path, method: :get, class: "flex flex-wrap gap-4 items-end" do %>
+      <div class="flex-1 min-w-[200px]">
+        <%= label_tag :query, "Search", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= text_field_tag :query, params[:query], placeholder: "Search businesses...", class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+      <div class="w-40">
+        <%= label_tag :industry, "Industry", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= select_tag :industry, options_for_select(@industries, params[:industry]), include_blank: "All Industries", class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+      <div class="w-40">
+        <%= label_tag :location, "Location", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= select_tag :location, options_for_select(@locations, params[:location]), include_blank: "All Locations", class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+      <div class="flex gap-2">
+        <%= submit_tag "Filter", class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer" %>
+        <% if params[:query].present? || params[:industry].present? || params[:location].present? %>
+          <%= link_to "Clear", directory_path, class: "bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
   <% if @businesses.any? %>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <% @businesses.each do |business| %>
-        <div class="bg-white p-6 rounded-lg shadow border border-gray-100">
+        <div class="bg-white p-6 rounded-lg shadow border border-gray-100 hover:shadow-md transition-shadow">
           <h2 class="text-xl font-bold text-blue-600 mb-2"><%= business.name %></h2>
           <p class="text-sm text-gray-500 mb-4"><%= business.industry %> | <%= business.location %></p>
-          <p class="text-gray-700 mb-4"><%= business.description %></p>
+          <p class="text-gray-700 mb-4 line-clamp-3"><%= business.description %></p>
           <div class="border-t pt-4 flex justify-between items-center">
-            <span class="text-sm text-gray-600">Owner: <%= business.user.name %></span>
+            <span class="text-sm text-gray-600">
+              <i class="fas fa-user mr-1"></i>
+              <% if business.user %>
+                <%= link_to business.user.name, profile_path(business.user), class: "text-blue-500 hover:underline" %>
+              <% else %>
+                Unknown
+              <% end %>
+            </span>
             <% if business.website_url.present? %>
               <%= link_to "Website", business.website_url, target: "_blank", class: "text-blue-500 hover:underline text-sm" %>
             <% end %>
@@ -24,7 +54,12 @@
     </div>
   <% else %>
     <div class="bg-gray-50 p-12 rounded-lg text-center border-2 border-dashed border-gray-200">
-      <p class="text-gray-500 text-lg italic">No businesses listed yet. Be the first to join!</p>
+      <p class="text-gray-500 text-lg italic mb-4">No businesses found matching your criteria.</p>
+      <% if params[:query].present? || params[:industry].present? || params[:location].present? %>
+        <%= link_to "Clear filters", directory_path, class: "text-blue-600 hover:underline" %>
+      <% else %>
+        <p class="text-gray-500 italic">Be the first to list your business!</p>
+      <% end %>
     </div>
   <% end %>
 </div>

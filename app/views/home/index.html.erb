@@ -1,17 +1,32 @@
-<div class="text-center">
-  <h1 class="text-4xl font-bold text-gray-900 mb-4">Welcome to VB Hub</h1>
-  <p class="text-xl text-gray-600 mb-8">Connecting volleyball players who own small businesses.</p>
-  
+<div class="max-w-2xl mx-auto">
+  <h1 class="text-3xl font-bold text-gray-900 mb-6 text-center">VB Hub Feed</h1>
+
   <% if user_signed_in? %>
-    <p class="text-lg">Hello, <span class="font-semibold text-blue-600"><%= current_user.name || current_user.email %></span>!</p>
-    <div class="mt-6 flex space-x-4 justify-center">
-      <%= link_to "View Directory", directory_path, class: "bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700" %>
-      <%= link_to "My Profile", edit_user_registration_path, class: "bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300" %>
+    <div class="bg-white rounded-lg shadow p-4 mb-6">
+      <%= form_with model: Post.new, url: posts_path, local: true, class: "flex flex-col gap-3" do |f| %>
+        <%= f.text_area :content, placeholder: "What's on your mind?", rows: 3, class: "w-full border border-gray-300 rounded-lg p-3 resize-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", required: true %>
+        <div class="flex justify-end">
+          <%= f.submit "Post", class: "bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 font-medium" %>
+        </div>
+      <% end %>
     </div>
   <% else %>
-    <div class="mt-6 flex space-x-4 justify-center">
-      <%= link_to "Join the Network", new_user_registration_path, class: "bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700" %>
-      <%= link_to "Browse Businesses", directory_path, class: "bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300" %>
+    <div class="bg-blue-50 rounded-lg p-4 mb-6 text-center">
+      <p class="text-blue-800">
+        <%= link_to "Sign in", new_user_session_path, class: "font-semibold underline" %> or
+        <%= link_to "join the network", new_user_registration_path, class: "font-semibold underline" %>
+        to share posts.
+      </p>
     </div>
   <% end %>
+
+  <div class="space-y-4">
+    <% if @posts.any? %>
+      <%= render partial: "home/post", collection: @posts, as: :post %>
+    <% else %>
+      <div class="text-center text-gray-500 py-8">
+        <p>No posts yet. Be the first to share!</p>
+      </div>
+    <% end %>
+  </div>
 </div>

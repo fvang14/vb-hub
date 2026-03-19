@@ -1,0 +1,67 @@
+<div class="max-w-2xl mx-auto mt-8">
+  <div class="bg-white shadow rounded-lg overflow-hidden">
+    <div class="p-6">
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900"><%= @business.name %></h1>
+          <% if @business.industry.present? %>
+            <p class="text-sm text-gray-500 mt-1"><%= @business.industry %></p>
+          <% end %>
+        </div>
+        <% if @business.user == current_user %>
+          <div class="flex gap-2">
+            <%= link_to "Edit", edit_business_path(@business), class: "text-blue-600 hover:text-blue-800 text-sm font-medium" %>
+            <%= button_to "Delete", @business, method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-800 text-sm font-medium" %>
+          </div>
+        <% end %>
+      </div>
+
+      <% if @business.description.present? %>
+        <div class="mb-4">
+          <h2 class="text-sm font-medium text-gray-700 mb-1">About</h2>
+          <p class="text-gray-600 whitespace-pre-wrap"><%= @business.description %></p>
+        </div>
+      <% end %>
+
+      <div class="grid grid-cols-2 gap-4 mt-6">
+        <% if @business.location.present? %>
+          <div>
+            <h2 class="text-sm font-medium text-gray-700 mb-1">Location</h2>
+            <p class="text-gray-600"><%= @business.location %></p>
+          </div>
+        <% end %>
+
+        <% if @business.website_url.present? %>
+          <div>
+            <h2 class="text-sm font-medium text-gray-700 mb-1">Website</h2>
+            <%= link_to @business.website_url, @business.website_url, target: "_blank", rel: "noopener noreferrer", class: "text-blue-600 hover:text-blue-800 break-all" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-gray-200">
+        <p class="text-sm text-gray-500">
+          Owned by <%= link_to @business.user.name, profile_path(@business.user), class: "text-blue-600 hover:text-blue-800 font-medium" %>
+        </p>
+      </div>
+    </div>
+
+    <% if @business.posts.any? %>
+      <div class="border-t border-gray-200 p-6 bg-gray-50">
+        <h2 class="text-lg font-medium text-gray-900 mb-4">Recent Posts</h2>
+        <div class="space-y-4">
+          <% @business.posts.order(created_at: :desc).limit(5).each do |post| %>
+            <div class="bg-white rounded-lg shadow p-4">
+              <p class="text-gray-700 whitespace-pre-wrap"><%= post.content %></p>
+              <p class="text-xs text-gray-400 mt-2"><%= time_ago_in_words(post.created_at) %> ago</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-4">
+    <%= link_to "Back to My Businesses", businesses_path, class: "text-blue-600 hover:text-blue-800 text-sm" %>
+  </div>
+</div>

@@ -2,7 +2,7 @@
   <div class="flex justify-between items-center mb-8">
     <h1 class="text-3xl font-bold text-gray-900">Business Directory</h1>
     <% if user_signed_in? %>
-      <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add Your Business</a>
+      <%= link_to "Add Your Business", new_business_path, class: "bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" %>
     <% end %>
   </div>
 

@@ -1,0 +1,46 @@
+<h2 class="text-2xl font-bold mb-6">Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "w-full max-w-md bg-white p-8 rounded-lg shadow" }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="mb-4">
+    <%= f.label :name, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_field :name, autofocus: true, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.email_field :email, autocomplete: "email", class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :home_facility, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_field :home_facility, placeholder: "e.g. Kokoro Volleyball", class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :volleyball_bio, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_area :volleyball_bio, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
+    <% if @minimum_password_length %>
+    <em class="text-xs text-gray-500">(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" %>
+  </div>
+
+  <div class="mb-6">
+    <%= f.label :password_confirmation, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up", class: "w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 cursor-pointer" %>
+  </div>
+<% end %>
+
+<div class="mt-4">
+  <%= render "devise/shared/links" %>
+</div>

@@ -1,0 +1,17 @@
+<div class="text-center">
+  <h1 class="text-4xl font-bold text-gray-900 mb-4">Welcome to VB Hub</h1>
+  <p class="text-xl text-gray-600 mb-8">Connecting volleyball players who own small businesses.</p>
+  
+  <% if user_signed_in? %>
+    <p class="text-lg">Hello, <span class="font-semibold text-blue-600"><%= current_user.name || current_user.email %></span>!</p>
+    <div class="mt-6 flex space-x-4 justify-center">
+      <%= link_to "View Directory", directory_path, class: "bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700" %>
+      <%= link_to "My Profile", edit_user_registration_path, class: "bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300" %>
+    </div>
+  <% else %>
+    <div class="mt-6 flex space-x-4 justify-center">
+      <%= link_to "Join the Network", new_user_registration_path, class: "bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700" %>
+      <%= link_to "Browse Businesses", directory_path, class: "bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300" %>
+    </div>
+  <% end %>
+</div>

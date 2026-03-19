@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   get "home/index"
   get "directory", to: "directory#index"
-  
+  get "profile/:id", to: "profiles#show", as: :profile
+
   devise_for :users
-  
+
   root "home#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

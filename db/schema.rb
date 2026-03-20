@@ -23,7 +23,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_19_201239) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.string "website_url"
-    t.index ["user_id"], name: "index_businesses_on_user_id"
+    t.index [ "user_id" ], name: "index_businesses_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -32,8 +32,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_19_201239) do
     t.bigint "receiver_id", null: false
     t.bigint "sender_id", null: false
     t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
-    t.index ["sender_id"], name: "index_messages_on_sender_id"
+    t.index [ "receiver_id" ], name: "index_messages_on_receiver_id"
+    t.index [ "sender_id" ], name: "index_messages_on_sender_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -41,7 +41,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_19_201239) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["business_id"], name: "index_posts_on_business_id"
+    t.index [ "business_id" ], name: "index_posts_on_business_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,8 +56,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_19_201239) do
     t.string "role"
     t.datetime "updated_at", null: false
     t.text "volleyball_bio"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index [ "email" ], name: "index_users_on_email", unique: true
+    t.index [ "reset_password_token" ], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "businesses", "users"
